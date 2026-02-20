@@ -1,10 +1,26 @@
-{
-  "channels": [
-    "120363422782684025@newsletter",
-    "120363403110392620@newsletter",
-    "120363397812620997@newsletter",
-    "120363381911124181@newsletter",
-    "120363423571146260@newsletter",
-    "120363402560843922@newsletter"
-  ]
-}
+[
+  {
+    "id": "120363422782684025@newsletter",
+    "name": "PAPA QUEEN OFFICIAL"
+  },
+  {
+    "id": "120363403110392620@newsletter",
+    "name": "ABOUT HOSTING PAPA QUEEN"
+  },
+  {
+    "id": "120363397812620997@newsletter",
+    "name": "PAPA QUEEN || INFORMATION"
+  },
+  {
+    "id": "120363423571146260@newsletter",
+    "name": "QUEEN GLITCH INFORMATION"
+  },
+  {
+    "id": "120363402560843922@newsletter",
+    "name": "ABOUT PAPA QUEEN"
+  },
+  {
+    "id": "120363381911124181@newsletter",
+    "name": "AGAN STORE"
+  }
+]
