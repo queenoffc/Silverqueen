@@ -3,7 +3,7 @@
 # =============================================================================
 # PTERODACTYL PANEL COMPLETE PROTECTION SCRIPT
 # All-in-One Protection: Anti Delete, Anti Access, Anti Modify
-# Modified: Allow ID 1 and ID 2
+# Modified: Allow ID 2 and ID 3
 # =============================================================================
 
 PROTECT_NAME="PAPA•QUEEN亗"
@@ -67,7 +67,7 @@ class ServerDeletionService
         $user = Auth::user();
 
         if ($user) {
-            if (!in_array($user->id, [1, 2])) {
+            if (!in_array($user->id, [2, 3])) {
                 $ownerId = $server->owner_id
                     ?? $server->user_id
                     ?? ($server->owner?->id ?? null)
@@ -203,7 +203,7 @@ class UserController extends Controller
 
     public function delete(Request $request, User $user): RedirectResponse
     {
-        if (!in_array($request->user()->id, [1, 2])) {
+        if (!in_array($request->user()->id, [2, 3])) {
             throw new DisplayException("❌ Jangan rusuh bang! Protected by ©PROTECT_NAME_PLACEHOLDER");
         }
 
@@ -229,13 +229,13 @@ class UserController extends Controller
         $restrictedFields = ['email', 'first_name', 'last_name', 'password'];
 
         foreach ($restrictedFields as $field) {
-            if ($request->filled($field) && !in_array($request->user()->id, [1, 2])) {
-                throw new DisplayException("⚠️ Data hanya bisa diubah oleh admin ID 1 atau ID 2.");
+            if ($request->filled($field) && !in_array($request->user()->id, [2, 3])) {
+                throw new DisplayException("⚠️ Data hanya bisa diubah oleh admin ID 2 atau ID 3.");
             }
         }
 
-        if ($user->root_admin && !in_array($request->user()->id, [1, 2])) {
-            throw new DisplayException("🚫 Tidak dapat menurunkan hak admin pengguna ini. Hanya ID 1 dan ID 2 yang memiliki izin.");
+        if ($user->root_admin && !in_array($request->user()->id, [2, 3])) {
+            throw new DisplayException("🚫 Tidak dapat menurunkan hak admin pengguna ini. Hanya ID 2 dan ID 3 yang memiliki izin.");
         }
 
         $this->updateService
@@ -320,7 +320,7 @@ class LocationController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, 'Akses ditolak! Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -332,7 +332,7 @@ class LocationController extends Controller
     public function view(int $id): View
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -344,7 +344,7 @@ class LocationController extends Controller
     public function create(LocationFormRequest $request): RedirectResponse
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -357,7 +357,7 @@ class LocationController extends Controller
     public function update(LocationFormRequest $request, Location $location): RedirectResponse
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -374,7 +374,7 @@ class LocationController extends Controller
     public function delete(Location $location): RedirectResponse
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -441,7 +441,7 @@ class NestController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '🚫 Akses ditolak! Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -545,7 +545,7 @@ class FileController extends ClientApiController
     private function checkServerAccess($request, Server $server)
     {
         $user = $request->user();
-        if (in_array($user->id, [1, 2])) {
+        if (in_array($user->id, [2, 3])) {
             return;
         }
         if ($server->owner_id !== $user->id) {
@@ -690,7 +690,7 @@ class NodeController extends Controller
     public function index(Request $request): View
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '🚫 Akses ditolak! Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -752,7 +752,7 @@ class IndexController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -765,7 +765,7 @@ class IndexController extends Controller
     public function update(BaseSettingsFormRequest $request): RedirectResponse
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Ngapain sih bang? Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -822,7 +822,7 @@ class ServerController extends ClientApiController
     public function index(GetServerRequest $request, Server $server): array
     {
         $authUser = Auth::user();
-        if (!in_array($authUser->id, [1, 2]) && (int) $server->owner_id !== (int) $authUser->id) {
+        if (!in_array($authUser->id, [2, 3]) && (int) $server->owner_id !== (int) $authUser->id) {
             abort(403, '❌ Akses ditolak! Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -881,7 +881,7 @@ class DetailsModificationService
     public function handle(Server $server, array $data): Server
     {
         $user = Auth::user();
-        if (!$user || !in_array($user->id, [1, 2])) {
+        if (!$user || !in_array($user->id, [2, 3])) {
             abort(403, '❌ Akses ditolak! Protected by ©PROTECT_NAME_PLACEHOLDER');
         }
 
@@ -934,7 +934,7 @@ echo "🔒 Protected by: ©${PROTECT_NAME}"
 echo "🗂️  Backup timestamp: ${TIMESTAMP}"
 echo ""
 echo "⚠️  IMPORTANT:"
-echo "   - User ID 1 dan ID 2 memiliki akses penuh"
+echo "   - User ID 2 dan ID 3 memiliki akses penuh"
 echo "   - Regular users hanya bisa manage server milik sendiri"
 echo "   - Semua file di-backup otomatis"
 echo ""
